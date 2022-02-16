@@ -12,6 +12,7 @@ public class ProductDao {
     private String productname;
     private String productdesc;
     private Integer qty;
+    private Integer price;
     private Integer storeid;
     private Integer categoryid;
 }

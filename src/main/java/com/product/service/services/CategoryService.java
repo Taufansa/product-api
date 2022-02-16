@@ -4,6 +4,7 @@ import com.product.service.model.dao.CategoryDao;
 import com.product.service.model.entity.Category;
 import com.product.service.model.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Cacheable
     public List<Category> getAll() throws Exception {
         try {
             return categoryRepository.findAll();

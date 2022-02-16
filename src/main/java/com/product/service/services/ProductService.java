@@ -6,6 +6,7 @@ import com.product.service.model.entity.Product;
 import com.product.service.model.entity.Store;
 import com.product.service.model.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +24,7 @@ public class ProductService {
     @Autowired
     private CategoryService categoryService;
 
+    @Cacheable
     public List<Product> fetchAll() throws Exception{
         try{
             return productsRepository.findAll();
@@ -32,6 +34,7 @@ public class ProductService {
         }
     }
 
+    @Cacheable
     public List<Product> fetchAllByStore(Integer id) throws Exception{
         try {
             Store store = storeService.findById(id);
@@ -42,6 +45,7 @@ public class ProductService {
         }
     }
 
+    @Cacheable
     public List<Product> fetchAllByCategory(Integer id) throws Exception{
         try {
             Category category = categoryService.getById(id);
@@ -52,6 +56,7 @@ public class ProductService {
         }
     }
 
+    @Cacheable
     public List<Product> fetchAllByCategoryAndStore(Integer categoryid, Integer storeid) throws Exception{
         try {
             Category category = categoryService.getById(categoryid);
@@ -87,6 +92,7 @@ public class ProductService {
                     productDao.getProductname(),
                     productDao.getProductdesc(),
                     productDao.getQty(),
+                    productDao.getPrice(),
                     store,
                     category
             );
@@ -105,6 +111,7 @@ public class ProductService {
             product.setProductdesc(productDao.getProductdesc());
             product.setProductname(productDao.getProductname());
             product.setQty(productDao.getQty());
+            product.setPrice(productDao.getPrice());
             product.setCategory(category);
             return productsRepository.saveAndFlush(product);
         } catch (Exception e) {

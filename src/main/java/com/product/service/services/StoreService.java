@@ -4,6 +4,7 @@ import com.product.service.model.dao.StoreDao;
 import com.product.service.model.entity.Store;
 import com.product.service.model.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,6 +16,7 @@ public class StoreService {
     @Autowired
     private StoreRepository storeRepository;
 
+    @Cacheable
     public List<Store> fetchAll() throws Exception{
         try {
             return storeRepository.findAll();

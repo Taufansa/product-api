@@ -21,6 +21,7 @@ public class Product implements Serializable {
     private String productname;
     private String productdesc;
     private Integer qty;
+    private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeid", insertable = true, updatable = true, nullable = false)
